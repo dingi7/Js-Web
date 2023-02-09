@@ -1,0 +1,22 @@
+<body>
+  <main>
+          <h2>Add Cat Breed</h2>
+    <form action='#' method=''>
+      <label for='breed-name'>Breed Name</label>
+      <input name='breed' type='text' id='breed-name' />
+      <button type='submit' id='de'>Add Breed</button>
+    </form>
+  </main>
+</body>
+
+<script>
+
+  document.getElementById('de').addEventListener('click', async()=> { 
+    const breed = document.getElementById("breed-name").value
+    const res = await fetch('http://localhost:3000/pet', 
+    { method: 'POST', 
+    body: JSON.stringify({breed: breed}),
+    headers: { 'Content-Type': 'application/json' },
+    })
+    })
+</script>
