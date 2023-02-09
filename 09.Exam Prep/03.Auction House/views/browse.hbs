@@ -1,0 +1,37 @@
+<main>
+    <section id='catalog-section' class='spaced'>
+
+        <h1 class='item'>Auctions</h1>
+
+        <!-- List of available auctions -->
+        {{#if auctions}}
+        <ul class='catalog cards'>
+            {{#each auctions}}
+            <li class='item'>
+                <header class='pad-med'>
+                    <h2>{{this.title}}</h2>
+                </header>
+
+                <div class='align-center'>
+                    <img class='img-thumb' src='{{this.image}}' />
+                </div>
+
+                <footer class='align-center pad-med'>
+                    <p>Current price: <strong>${{this.price}}</strong></p>
+                    <a class='action' href='/products/details/{{this._id}}'>See details</a>
+                </footer>
+            </li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <!-- If there are no auctions to display -->
+        <div class='item pad-large align-center'>
+            <p>Nothing has been listed yet. Be the first!</p>
+            <div>
+                <a class='action' href='/products/create'>Publish Auction</a>
+            </div>
+        </div>
+        {{/if}}
+    </section>
+
+</main>

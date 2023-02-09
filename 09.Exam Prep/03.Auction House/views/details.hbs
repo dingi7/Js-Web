@@ -1,0 +1,80 @@
+<main>
+
+    <!-- In case of error, display the following div--><!--
+
+            <div class="error-box">
+                <p>Show each error in a separate paragraph</p>
+            </div>
+
+            -->
+
+    <!-- Details Page - Auction owner -->
+    <section id='catalog-section'>
+
+        <h1 class='item'>
+            {{auction.title}}
+            {{#if owner}}
+            <div class='f-right'>
+                <a class='action pad-small f-left' href='/products/edit/{{auction._id}}'>Edit</a>
+                <a class='action pad-small f-left' href='/products/delete/{{auction._id}}'>Delete</a>
+            </div>
+            {{/if}}
+        </h1>
+        <div class='item padded'>
+
+            <div class='layout right large'>
+
+                <div class='col'>
+                    <img src='{{auction.image}}' class='img-large' />
+                </div>
+
+                <div class='content pad-med'>
+
+                    <p>In category: <strong>{{auction.category}}</strong></p>
+                    <p>{{auction.description}}</p>
+
+                    <div class='align-center'>
+                        <div>
+                            Current price: $<strong>{{auction.price}}</strong>
+                        </div>
+                        {{#if owner}}
+                        <div>
+                            {{#if auction.bidder}}
+                            <!-- If there is a bidder -->
+                            Bid by
+                            <strong>{{auction.bidder.firstName}} {{auction.bidder.lastName}}</strong>
+                            <a class='action pad-med cta' href='/products/close/{{auction._id}}'>Close
+                                Auction</a>
+                            {{else}}
+                            <!-- If there are no bids -->
+                            No bids
+                            {{/if}}
+                        </div>
+                        {{else}}
+                        {{#if user}}
+                        {{#if isBid}}
+                        <div>
+                            You are currently the
+                            <strong>highest bidder</strong>
+                            for this auction
+                        </div>
+                        {{else}}
+                        <form class='vertical' method='POST' action='/products/bid/{{auction._id}}'>
+                            <label><span>Bid amount</span><input type='number' name='amount' /></label>
+                            <input class='action' type='submit' value='Place bid' />
+                        </form>
+                        {{/if}}
+                        <!-- If current user is the bidder -->
+                        {{/if}}
+                        {{/if}}
+                    </div>
+
+                </div>
+            </div>
+
+            <footer>Listed by {{auction.owner.firstName}} {{auction.owner.lastName}}</footer>
+        </div>
+
+    </section>
+
+</main>
